@@ -6,12 +6,24 @@ package com.epgs.rhpam_pipeline;
 
 public class test implements java.io.Serializable {
 
-    static final long serialVersionUID = 1L;
+	static final long serialVersionUID = 1L;
 
-    public test() {
-    }
+	@org.kie.api.definition.type.Label(value = "hello")
+	private java.lang.String hello;
 
+	public test() {
+	}
 
+	public java.lang.String getHello() {
+		return this.hello;
+	}
 
+	public void setHello(java.lang.String hello) {
+		this.hello = hello;
+	}
+
+	public test(java.lang.String hello) {
+		this.hello = hello;
+	}
 
 }
