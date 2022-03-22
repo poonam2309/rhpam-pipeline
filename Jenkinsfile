@@ -10,6 +10,7 @@ pipeline {
             script {
                       echo "Tesing Pipeline"
                       sh 'mvn --version'
+                      sh 'java -version'
                       sh 'pwd'
                       sh 'ls -lrt'
                       sh 'mvn clean package' 
