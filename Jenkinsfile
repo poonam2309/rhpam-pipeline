@@ -1,5 +1,5 @@
 pipeline {
-  agent any
+  agent maven
   stages {
     stage('Containerfilecopied') {
         steps {
