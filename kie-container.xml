@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<kie-container>
+    <config-items>
+        <itemName>RuntimeStrategy</itemName>
+        <itemValue>SINGLETON</itemValue>
+        <itemType>java.lang.String</itemType>
+    </config-items>
+    <config-items>
+        <itemName>MergeMode</itemName>
+        <itemValue>MERGE_COLLECTIONS</itemValue>
+        <itemType>java.lang.String</itemType>
+    </config-items>
+    <config-items>
+        <itemName>KBase</itemName>
+        <itemValue></itemValue>
+        <itemType>java.lang.String</itemType>
+    </config-items>
+    <config-items>
+        <itemName>KSession</itemName>
+        <itemValue></itemValue>
+        <itemType>java.lang.String</itemType>
+    </config-items>
+    <release-id>
+        <artifact-id>test</artifact-id>
+        <group-id>com.epgs</group-id>
+        <version>1.0.0-SNAPSHOT</version>
+    </release-id>
+    <scanner poll-interval="5000" status="STOPPED"/>
+</kie-container>
