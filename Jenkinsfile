@@ -18,6 +18,14 @@ pipeline {
                     }
                 }
              }
+    stage('kieServerDeploy'){
+      steps {
+        script {
+          echo "Deploying projects in Kie-server"
+          sh 'curl -v -u "admin:admin" -X PUT "http://localhost:8080/kie-server/services/rest/server/containers/test_1.0.0-SNAPSHOT" --data-binary "@kie-container.xml" -H "Content-Type: application/xml"'
+        }
+      }
+    }
     stage('ProjectBuild') {
       steps {
         script { 
