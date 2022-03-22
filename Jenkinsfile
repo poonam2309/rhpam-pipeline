@@ -22,6 +22,7 @@ pipeline {
       steps {
         script { 
           echo "Hello Poonam"
+          sh 'sleep 2m'
           //sh 'docker build -t helloworld:latest /tmp/workspace/dockerbuild/'
           
         }
