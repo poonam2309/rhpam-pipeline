@@ -15,7 +15,6 @@ pipeline {
                       sh 'ls -lrt'
                       sh 'mvn clean package --settings settings.xml' 
                       sh 'cat /etc/redhat-release'
-                      sh 'sudo bash'
                     }
                 }
              }
