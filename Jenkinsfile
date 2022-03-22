@@ -13,7 +13,7 @@ pipeline {
                       sh 'java -version'
                       sh 'pwd'
                       sh 'ls -lrt'
-                      sh 'mvn clean package --settings setting.xml' 
+                      sh 'mvn clean package --settings settings.xml' 
                       sh 'cat /etc/redhat-release'
                       sh 'sudo bash'
                     }
