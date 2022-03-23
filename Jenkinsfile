@@ -29,7 +29,7 @@ pipeline {
       steps {
         script {
           echo "Deploying projects in Kie-server"
-          sh 'curl -v -u "admin:admin" -X PUT "http://localhost:8080/kie-server/services/rest/server/containers/test_1.0.0-SNAPSHOT" --data-binary "@kie-container.xml" -H "Content-Type: application/xml"'
+          sh 'curl -v -u "adminUser:5G3XHvX4" -X PUT "https://lic-kieserver.apps.cluster-aea6.aea6.example.opentlc.com/services/rest/server/containers/test_1.0.0-SNAPSHOT" --data-binary "@kie-container.xml" -H "Content-Type: application/xml"'
         }
       }
     }
