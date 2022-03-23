@@ -42,8 +42,7 @@ pipeline {
           
         }
       }
-    }  //Project build state completed
-    
+    }  
     stage("Publish to Nexus Repository Manager") {
             steps {
                 script {
