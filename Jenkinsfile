@@ -44,8 +44,8 @@ pipeline {
                         echo "*** File: ${artifactPath}, group: ${pom.groupId}, packaging: ${pom.packaging}, version ${pom.version}";
                         nexusArtifactUploader{
                           nexusVersion(${NEXUS_VERSION})
-                            protocol(${NEXUS_PROTOCOL})
-                            nexusUrl(${NEXUS_URL})
+                          protocol(${NEXUS_PROTOCOL})
+                          nexusUrl(${NEXUS_URL})
                           groupId(${pom.groupId})
                           version(${pom.version})
                           repository(${NEXUS_REPOSITORY})
@@ -53,6 +53,7 @@ pipeline {
                               artifacts: {
                                 artifactId(pom.artifactId)
                                 file(artifactPath)
+                                classifier('debug')
                                 type(pom.packaging)
                                 artifactId(pom.artifactId)
                                 file('pom.xml')
