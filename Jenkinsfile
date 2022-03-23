@@ -50,7 +50,7 @@ pipeline {
                           version(${pom.version})
                           repository(${NEXUS_REPOSITORY})
                           credentialsId(${NEXUS_CREDENTIAL_ID})
-                              artifacts: {
+                              artifact {
                                 artifactId(pom.artifactId)
                                 classifier('debug')
                                 type(pom.packaging)
