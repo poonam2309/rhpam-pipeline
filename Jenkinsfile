@@ -21,11 +21,10 @@ pipeline {
                       sh 'pwd'
                       sh 'ls -lrt'
                       sh 'curl -s https://lic-nexus.apps.cluster-aea6.aea6.example.opentlc.com/repository/rhpam/com/epgs/test/maven-metadata.xml'
-                      sh 'curl -s https://lic-nexus.apps.cluster-aea6.aea6.example.opentlc.com/repository/rhpam/com/epgs/test/maven-metadata.xml |grep "<latest>.*</latest>" | sed -e "s#\(.*\)\(<latest>\)\(.*\)\(</latest>\)\(.*\)#\3#g"
-                      echo env.NEXUS_URL 
+                      sh 'curl -s https://lic-nexus.apps.cluster-aea6.aea6.example.opentlc.com/repository/rhpam/com/epgs/test/maven-metadata.xml |grep "<release>.*</release>" | sed -e "s#\(.*\)\(<release>\)\(.*\)\(</release>\)\(.*\)#\3#g"'
                       echo "new env ====== ${NEXUS_URL}"
                       sh 'mvn versions:set -DremoveSnapshot'
-                      sh 'mvn clean package --settings settings.xml -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn' 
+                      sh 'mvn clean package -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn --settings settings.xml' 
                       sh 'cat /etc/redhat-release'
                     }
                 }
