@@ -52,11 +52,9 @@ pipeline {
                           credentialsId(${NEXUS_CREDENTIAL_ID})
                               artifacts: {
                                 artifactId(pom.artifactId)
-                                classifier('')
                                 file(artifactPath)
                                 type(pom.packaging)
-                                [artifactId(pom.artifactId)
-                                classifier('')
+                                artifactId(pom.artifactId)
                                 file('pom.xml')
                                 type('pom')
                               }
