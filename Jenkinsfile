@@ -20,6 +20,8 @@ pipeline {
                       sh 'java -version'
                       sh 'pwd'
                       sh 'ls -lrt'
+                      sh 'curl -s https://lic-nexus.apps.cluster-aea6.aea6.example.opentlc.com/repository/rhpam/com/epgs/test/maven-metadata.xml'
+                      sh 'mvn versions:set -DremoveSnapshot'
                       sh 'mvn clean package --settings settings.xml -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn' 
                       sh 'cat /etc/redhat-release'
                     }
