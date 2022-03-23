@@ -25,25 +25,7 @@ pipeline {
                     }
                 }
              }
-    stage('kieServerDeploy'){
-      steps {
-        script {
-          echo "Deploying projects in Kie-server"
-          sh 'curl -v -k -u "adminUser:5G3XHvX4" -X PUT "https://lic-kieserver.apps.cluster-aea6.aea6.example.opentlc.com/services/rest/server/containers/test_1.0.0" --data-binary "@kie-container.xml" -H "Content-Type: application/xml"'
-        }
-      }
-    }
-    stage('ProjectBuild') {
-      steps {
-        script { 
-          echo "Hello Poonam"
-          sh 'sleep 2m'
-          //sh 'docker build -t helloworld:latest /tmp/workspace/dockerbuild/'
-          
-        }
-      }
-    }  
-    stage("Publish to Nexus Repository Manager") {
+    stage('Publish to Nexus Repository Manager') {
             steps {
                 script {
                     pom = readMavenPom file: "pom.xml";
@@ -79,5 +61,23 @@ pipeline {
                 }
             }
         }
+    stage('kieServerDeploy'){
+      steps {
+        script {
+          echo "Deploying projects in Kie-server"
+          sh 'curl -v -k -u "adminUser:5G3XHvX4" -X PUT "https://lic-kieserver.apps.cluster-aea6.aea6.example.opentlc.com/services/rest/server/containers/test_1.0.0" --data-binary "@kie-container.xml" -H "Content-Type: application/xml"'
+        }
+      }
+    }
+    stage('ProjectBuild') {
+      steps {
+        script { 
+          echo "Hello Poonam"
+          sh 'sleep 2m'
+          //sh 'docker build -t helloworld:latest /tmp/workspace/dockerbuild/'
+          
+        }
+      }
+    }  
   }
 }
