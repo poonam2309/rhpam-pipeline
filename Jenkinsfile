@@ -25,8 +25,7 @@ pipeline {
                       echo "new env ====== ${NEXUS_URL}"
                       sh 'mvn versions:set -DremoveSnapshot'
                       sh 'mvn clean package -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn --settings settings.xml' 
-                      sh 'cat /etc/redhat-release'
-                    }
+                   }
                 }
              }
     stage('Publish to Nexus Repository Manager') {
