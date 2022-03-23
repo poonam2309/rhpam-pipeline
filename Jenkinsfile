@@ -20,7 +20,7 @@ pipeline {
                       sh 'java -version'
                       sh 'pwd'
                       sh 'ls -lrt'
-                      sh 'mvn clean package --settings settings.xml' 
+                      sh 'mvn clean package --settings settings.xml -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn' 
                       sh 'cat /etc/redhat-release'
                     }
                 }
