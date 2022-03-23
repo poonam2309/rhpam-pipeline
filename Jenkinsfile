@@ -36,13 +36,13 @@ pipeline {
                     sh 'ls -la' 
                     pom = readMavenPom file: "pom.xml";
                     filesByGlob = findFiles(glob: "target/*.jar");
-                    echo '${filesByGlob[0].name} ${filesByGlob[0].path} ${filesByGlob[0].directory} ${filesByGlob[0].length} ${filesByGlob[0].lastModified}'
+                    echo "${filesByGlob[0].name} ${filesByGlob[0].path} ${filesByGlob[0].directory} ${filesByGlob[0].length} ${filesByGlob[0].lastModified}"
                     artifactPath = filesByGlob[0].path;
                     echo '$artifactPath'
                     artifactExists = fileExists artifactPath;
                     if(artifactExists) {
                         echo "*** File: ${artifactPath}, group: ${pom.groupId}, packaging: ${pom.packaging}, version ${pom.version}";
-                        nexusArtifactUploader(
+                        nexusArtifactUploader{
                             nexusVersion: NEXUS_VERSION,
                             protocol: NEXUS_PROTOCOL,
                             nexusUrl: NEXUS_URL,
@@ -50,17 +50,17 @@ pipeline {
                             version: pom.version,
                             repository: NEXUS_REPOSITORY,
                             credentialsId: NEXUS_CREDENTIAL_ID,
-                            artifacts: [
-                                [artifactId: pom.artifactId,
+                              artifacts: {
+                                artifactId: pom.artifactId,
                                 classifier: '',
                                 file: artifactPath,
                                 type: pom.packaging],
                                 [artifactId: pom.artifactId,
                                 classifier: '',
                                 file: "pom.xml",
-                                type: "pom"]
-                            ]
-                        );
+                                type: "pom"
+                              }
+                        }
                       sh 'file uploaded into nexus successfully'
                     } else {
                         error "*** File: ${artifactPath}, could not be found";
