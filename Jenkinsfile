@@ -70,7 +70,7 @@ pipeline {
          file: 'filesByGlob[0].name',
          type: 'jar']
     ]
-                         )}
+                         );
                       sh 'file uploaded into nexus successfully'
                     } else {
                         error "*** File: ${artifactPath}, could not be found";
