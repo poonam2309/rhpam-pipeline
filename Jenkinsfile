@@ -52,12 +52,9 @@ pipeline {
                           credentialsId(${NEXUS_CREDENTIAL_ID})
                               artifacts: {
                                 artifactId(pom.artifactId)
-                                file(artifactPath)
                                 classifier('debug')
                                 type(pom.packaging)
-                                artifactId(pom.artifactId)
-                                file('pom.xml')
-                                type('pom')
+                                file(${filesByGlob[0].name})
                               }
                         }
                       sh 'file uploaded into nexus successfully'
