@@ -73,6 +73,7 @@ pipeline {
                                 type: "pom"]
                             ]
                         );
+                      sh 'file uploaded into nexus successfully'
                     } else {
                         error "*** File: ${artifactPath}, could not be found";
                     }
