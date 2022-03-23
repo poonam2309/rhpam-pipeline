@@ -25,7 +25,7 @@ pipeline {
                       echo "new env ====== ${NEXUS_URL}"
                      // sh 'mvn versions:set -DremoveSnapshot'
               //sh 'mvn --settings settings.xml clean package -Dorg.slf4j.simpleLogger.defaultLogLevel=error ' 
-                      sh 'mvn --settings settings.xml clean package -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn ' 
+                      sh 'mvn --settings settings.xml clean package -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn' 
                    }
                 }
              }
@@ -33,10 +33,10 @@ pipeline {
             steps {
                 script {
                     echo "inside nexus push"
-                    sh 'pwd' 
+                    sh 'ls -la' 
                     pom = readMavenPom file: "pom.xml";
                     filesByGlob = findFiles(glob: "target/*.jar");
-                    echo "${filesByGlob[0].name} ${filesByGlob[0].path} ${filesByGlob[0].directory} ${filesByGlob[0].length} ${filesByGlob[0].lastModified}"
+                    echo '${filesByGlob[0].name} ${filesByGlob[0].path} ${filesByGlob[0].directory} ${filesByGlob[0].length} ${filesByGlob[0].lastModified}'
                     artifactPath = filesByGlob[0].path;
                     echo '$artifactPath'
                     artifactExists = fileExists artifactPath;
