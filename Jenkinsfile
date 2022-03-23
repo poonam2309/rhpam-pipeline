@@ -25,13 +25,14 @@ pipeline {
                       echo "new env ====== ${NEXUS_URL}"
                      // sh 'mvn versions:set -DremoveSnapshot'
               //sh 'mvn --settings settings.xml clean package -Dorg.slf4j.simpleLogger.defaultLogLevel=error ' 
-                      sh 'mvn --settings settings.xml clean package -Dorg.slf4j.simpleLogger.defaultLogLevel=error ' 
+                      sh 'mvn --settings settings.xml clean package -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn ' 
                    }
                 }
              }
     stage('Publish to Nexus Repository Manager') {
             steps {
                 script {
+                   echo "inside nexus push"
                     pom = readMavenPom file: "pom.xml";
                     filesByGlob = findFiles(glob: "target/*.${pom.packaging}");
                     echo "${filesByGlob[0].name} ${filesByGlob[0].path} ${filesByGlob[0].directory} ${filesByGlob[0].length} ${filesByGlob[0].lastModified}"
