@@ -21,6 +21,7 @@ pipeline {
                       sh 'pwd'
                       sh 'ls -lrt'
                       sh 'curl -s https://lic-nexus.apps.cluster-aea6.aea6.example.opentlc.com/repository/rhpam/com/epgs/test/maven-metadata.xml'
+                      sh 'curl -s https://lic-nexus.apps.cluster-aea6.aea6.example.opentlc.com/repository/rhpam/com/epgs/test/maven-metadata.xml |grep "<latest>.*</latest>" | sed -e "s#\(.*\)\(<latest>\)\(.*\)\(</latest>\)\(.*\)#\3#g"
                       echo env.NEXUS_URL 
                       echo "new env ====== ${NEXUS_URL}"
                       sh 'mvn versions:set -DremoveSnapshot'
