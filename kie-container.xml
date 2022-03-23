@@ -23,7 +23,7 @@
     <release-id>
         <artifact-id>test</artifact-id>
         <group-id>com.epgs</group-id>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>1.0.0</version>
     </release-id>
     <scanner poll-interval="5000" status="STOPPED"/>
 </kie-container>
