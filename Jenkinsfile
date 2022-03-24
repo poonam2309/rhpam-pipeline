@@ -51,7 +51,7 @@ pipeline {
                                repository: NEXUS_REPOSITORY,
                                credentialsId: NEXUS_CREDENTIAL_ID,
                      artifacts: [
-                       [artifactId: rhpam-pipeline,
+                       [artifactId: 'rhpam-pipeline',
                         classifier: '',
                         file: filesByGlob[0].path,
                         type: 'jar']
