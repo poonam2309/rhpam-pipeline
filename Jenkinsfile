@@ -24,13 +24,12 @@ pipeline {
                       sh 'ls -lart'
                       echo "inside git clone"
                       sh 'git clone ${GIT_URL}/${GIT_PROJECT}'
-                      sh 'ls -lart;ls -la ${GIT_PROJECT}'
-                      pom = readMavenPom file: "${GIT_PROJECT}/pom.xml";
-                      artifactExists = fileExists artifactPath;
+                      sh 'ls -la ${GIT_PROJECT}'
                       echo "new env ====== ${NEXUS_URL}"
                      // sh 'mvn versions:set -DremoveSnapshot'
               //sh 'mvn --settings settings.xml clean package -Dorg.slf4j.simpleLogger.defaultLogLevel=error ' 
-                      sh 'cd ${GIT_PROJECT} ; mvn --settings ../settings.xml clean package -Dorg.slf4j.simpleLogger.defaultLogLevel=warn' 
+                      sh 'cd ${GIT_PROJECT}' 
+                      sh 'mvn --settings ../settings.xml clean package -Dorg.slf4j.simpleLogger.defaultLogLevel=warn' 
                    }
                 }
              }
