@@ -24,19 +24,13 @@ pipeline {
                       sh 'ls -lart'
                       echo "inside git clone"
                       sh 'git clone ${GIT_URL}/${GIT_PROJECT}'
-                      sh 'ls -la ${GIT_PROJECT}'
-                      pom = readMavenPom file: "pom.xml";
-                      filesByGlob = findFiles(glob: "target/*.jar");
-                      echo "${filesByGlob[0].name} ${filesByGlob[0].path} ${filesByGlob[0].directory} ${filesByGlob[0].length} ${filesByGlob[0].lastModified}"
-                      artifactPath = filesByGlob[0].path;
-                      echo '$artifactPath'
+                      sh 'ls -lart;ls -la ${GIT_PROJECT}'
+                      pom = readMavenPom file: "${GIT_PROJECT}/pom.xml";
                       artifactExists = fileExists artifactPath;
-                      sh 'curl -s https://lic-nexus.apps.cluster-aea6.aea6.example.opentlc.com/repository/rhpam/com/epgs/test/maven-metadata.xml'
-                      //curl -s https://lic-nexus.apps.cluster-aea6.aea6.example.opentlc.com/repository/rhpam/com/epgs/test/maven-metadata.xml | grep '<release>.*</release>' | sed -e 's\(.*\)\(<release>\)\(.*\)\(</release>\)\(.*\)#\3#g'
                       echo "new env ====== ${NEXUS_URL}"
                      // sh 'mvn versions:set -DremoveSnapshot'
               //sh 'mvn --settings settings.xml clean package -Dorg.slf4j.simpleLogger.defaultLogLevel=error ' 
-                      sh 'mvn --settings settings.xml clean package -Dorg.slf4j.simpleLogger.defaultLogLevel=warn' 
+                      sh 'cd ${GIT_PROJECT} ; mvn --settings ../settings.xml clean package -Dorg.slf4j.simpleLogger.defaultLogLevel=warn' 
                    }
                 }
              }
@@ -45,8 +39,8 @@ pipeline {
                 script {
                     echo "inside nexus push"
                     sh 'ls -la' 
-                    pom = readMavenPom file: "pom.xml";
-                    filesByGlob = findFiles(glob: "target/*.jar");
+                    pom = readMavenPom file: "${GIT_PROJECT}/pom.xml";
+                    filesByGlob = findFiles(glob: "${GIT_PROJECT}/target/*.jar");
                     echo "${filesByGlob[0].name} ${filesByGlob[0].path} ${filesByGlob[0].directory} ${filesByGlob[0].length} ${filesByGlob[0].lastModified}"
                     artifactPath = filesByGlob[0].path;
                     echo '$artifactPath'
@@ -63,7 +57,7 @@ pipeline {
                                credentialsId: NEXUS_CREDENTIAL_ID,
                      artifacts: [
                        [artifactId: pom.artifactId,
-                        classifier: '',
+                        classifier: 'metadata',
                         file: filesByGlob[0].path,
                         type: 'jar']
                             ]
