@@ -41,7 +41,7 @@ pipeline {
                     echo '$artifactPath'
                     artifactExists = fileExists artifactPath;
                     if(artifactExists) {
-                        echo "*** File: ${artifactPath}, group: ${pom.groupId}, packaging: ${pom.packaging}, version ${pom.version}";
+                      echo "*** File: ${artifactPath}, group: ${pom.groupId}, artifact:${pom.artifactId} packaging: ${pom.packaging}, version: ${pom.version} ";
                         /*nexusArtifactUploader{
                           nexusVersion(${NEXUS_VERSION})
                           protocol(${NEXUS_PROTOCOL})
@@ -65,7 +65,7 @@ pipeline {
                                repository: NEXUS_REPOSITORY,
                                credentialsId: NEXUS_CREDENTIAL_ID,
     artifacts: [
-        [artifactId: pom.artifactId,
+        [artifactId: ${pom.artifactId},
          classifier: '',
          file: filesByGlob[0].path,
          type: 'jar']
