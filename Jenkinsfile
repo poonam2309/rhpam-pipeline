@@ -10,6 +10,8 @@ pipeline {
         NEXUS_URL = "lic-nexus.apps.cluster-aea6.aea6.example.opentlc.com"
         NEXUS_REPOSITORY = "rhpam"
         NEXUS_CREDENTIAL_ID = "nexus-credentials"
+        GIT_URL ="https://github.com/poonam2309"
+        GIT_PROJECT ="helloTask"
     }
   stages {
     stage('Containerfilecopied') {
@@ -19,9 +21,10 @@ pipeline {
                       sh 'mvn --version'
                       sh 'java -version'
                       sh 'pwd'
-                      sh 'ls -lrt'
-                      echo "inside nexus push"
-                      sh 'ls -la' 
+                      sh 'ls -lart'
+                      echo "inside git clone"
+                      sh 'git clone ${GIT_URL}/${GIT_PROJECT}'
+                      sh 'ls -la ${GIT_PROJECT}'
                       pom = readMavenPom file: "pom.xml";
                       filesByGlob = findFiles(glob: "target/*.jar");
                       echo "${filesByGlob[0].name} ${filesByGlob[0].path} ${filesByGlob[0].directory} ${filesByGlob[0].length} ${filesByGlob[0].lastModified}"
