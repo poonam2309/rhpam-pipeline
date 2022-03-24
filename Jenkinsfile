@@ -47,11 +47,11 @@ pipeline {
                              protocol: 'https',
                               nexusUrl: NEXUS_URL,
                                groupId: pom.groupId,
-                               version: '1.0.0',
+                               version: '2.0.0',
                                repository: NEXUS_REPOSITORY,
                                credentialsId: NEXUS_CREDENTIAL_ID,
                      artifacts: [
-                       [artifactId: 'rhpam-pipeline',
+                       [artifactId: pom.artifactId,
                         classifier: '',
                         file: filesByGlob[0].path,
                         type: 'jar']
