@@ -29,7 +29,7 @@ pipeline {
                       echo '$artifactPath'
                       artifactExists = fileExists artifactPath;
                       sh 'curl -s https://lic-nexus.apps.cluster-aea6.aea6.example.opentlc.com/repository/rhpam/com/epgs/test/maven-metadata.xml'
-                      sh 'curl -s https://lic-nexus.apps.cluster-aea6.aea6.example.opentlc.com/repository/rhpam/com/epgs/test/maven-metadata.xml |grep "<release>.*</release>" | sed -e "s#\(.*\)\(<release>\)\(.*\)\(</release>\)\(.*\)#\3#g"'
+                      sh 'curl -s https://lic-nexus.apps.cluster-aea6.aea6.example.opentlc.com/repository/rhpam/com/epgs/test/maven-metadata.xml |grep "<release>.*</release>" | sed -e "s\(.*\)\(<release>\)\(.*\)\(</release>\)\(.*\)#\3#g"'
                       echo "new env ====== ${NEXUS_URL}"
                      // sh 'mvn versions:set -DremoveSnapshot'
               //sh 'mvn --settings settings.xml clean package -Dorg.slf4j.simpleLogger.defaultLogLevel=error ' 
@@ -55,7 +55,7 @@ pipeline {
                              protocol: 'https',
                               nexusUrl: NEXUS_URL,
                                groupId: pom.groupId,
-                               version: '2.0.0',
+                               version: pom.version,
                                repository: NEXUS_REPOSITORY,
                                credentialsId: NEXUS_CREDENTIAL_ID,
                      artifacts: [
