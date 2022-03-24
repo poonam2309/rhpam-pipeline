@@ -56,7 +56,7 @@ pipeline {
                                credentialsId: NEXUS_CREDENTIAL_ID,
                      artifacts: [
                        [artifactId: pom.artifactId,
-                        classifier: 'metadata',
+                        classifier: '',
                         file: filesByGlob[0].path,
                         type: 'jar']
                             ]
@@ -72,7 +72,9 @@ pipeline {
       steps {
         script {
           echo "Deploying projects in Kie-server"
-          sh 'curl -v -k -u "adminUser:5G3XHvX4" -X PUT "https://lic-kieserver.apps.cluster-aea6.aea6.example.opentlc.com/services/rest/server/containers/test" --data-binary "@kie-container.xml" -H "Content-Type: application/xml"'
+          echo 'curl -v -k -u "adminUser:5G3XHvX4" -X PUT "https://lic-kieserver.apps.cluster-aea6.aea6.example.opentlc.com/services/rest/server/containers/${GIT_PROJECT}-1.0.0" --data-binary "@'${GIT_PROJECT}'/kie-container.xml" -H "Content-Type: application/xml"'
+        sh 'curl -v -k -u "adminUser:5G3XHvX4" -X PUT "https://lic-kieserver.apps.cluster-aea6.aea6.example.opentlc.com/services/rest/server/containers/${GIT_PROJECT}-1.0.0" --data-binary "@'${GIT_PROJECT}'/kie-container.xml" -H "Content-Type: application/xml"'
+   
         }
       }
     }
