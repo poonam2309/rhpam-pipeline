@@ -7,7 +7,7 @@ pipeline {
    environment {
         NEXUS_VERSION = "nexus3"
         NEXUS_PROTOCOL = "https"
-        NEXUS_URL = "https://lic-nexus.apps.cluster-aea6.aea6.example.opentlc.com"
+        NEXUS_URL = "lic-nexus.apps.cluster-aea6.aea6.example.opentlc.com"
         NEXUS_REPOSITORY = "rhpam"
         NEXUS_CREDENTIAL_ID = "nexus-credentials"
     }
@@ -41,21 +41,7 @@ pipeline {
                     echo '$artifactPath'
                     artifactExists = fileExists artifactPath;
                     if(artifactExists) {
-                      echo "*** File: ${artifactPath}, group: ${pom.groupId}, artifact:${pom.artifactId} packaging: ${pom.packaging}, version: ${pom.version} ";
-                        /*nexusArtifactUploader{
-                          nexusVersion(${NEXUS_VERSION})
-                          protocol(${NEXUS_PROTOCOL})
-                          nexusUrl(${NEXUS_URL})
-                          groupId(${pom.groupId})
-                          version(${pom.version})
-                          repository(${NEXUS_REPOSITORY})
-                          credentialsId(${NEXUS_CREDENTIAL_ID})
-                              artifact {
-                                artifactId(pom.artifactId)
-                                classifier('debug')
-                                type(pom.packaging)
-                                file(${filesByGlob[0].name})
-                              }*/
+                      echo "*** File: ${artifactPath}, group: ${pom.groupId}, artifact: ${pom.artifactId} packaging: ${pom.packaging}, version: ${pom.version}"
                          nexusArtifactUploader(
                              nexusVersion: 'nexus3',
                              protocol: 'https',
@@ -64,12 +50,12 @@ pipeline {
                                version: NEXUS_VERSION,
                                repository: NEXUS_REPOSITORY,
                                credentialsId: NEXUS_CREDENTIAL_ID,
-    artifacts: [
-        [artifactId: pom.artifactId,
-         classifier: '',
-         file: filesByGlob[0].path,
-         type: 'jar']
-    ]
+                     artifacts: [
+                       [artifactId: rhpam-pipeline,
+                        classifier: '',
+                        file: filesByGlob[0].path,
+                        type: 'jar']
+                            ]
                          );
                       sh 'file uploaded into nexus successfully'
                     } else {
