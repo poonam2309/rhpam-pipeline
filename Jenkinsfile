@@ -50,6 +50,7 @@ pipeline {
                              nexusVersion: 'nexus3',
                              protocol: 'https',
                               nexusUrl: NEXUS_URL,
+                              version: '1.0.0',
                                groupId: pom.groupId,
                                repository: NEXUS_REPOSITORY,
                                credentialsId: NEXUS_CREDENTIAL_ID,
