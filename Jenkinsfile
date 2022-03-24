@@ -29,7 +29,7 @@ pipeline {
                      // sh 'mvn versions:set -DremoveSnapshot'
               //sh 'mvn --settings settings.xml clean package -Dorg.slf4j.simpleLogger.defaultLogLevel=error ' 
                       sh 'cd ${GIT_PROJECT}' 
-                      sh 'mvn --settings ../settings.xml clean package -Dorg.slf4j.simpleLogger.defaultLogLevel=warn' 
+                      sh 'mvn --settings settings.xml clean package --file ${GIT_PROJECT}/pom.xml -Dorg.slf4j.simpleLogger.defaultLogLevel=warn' 
                    }
                 }
              }
