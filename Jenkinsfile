@@ -67,7 +67,7 @@ pipeline {
     artifacts: [
         [artifactId: pom.artifactId,
          classifier: '',
-         file: ${filesByGlob[0].path},
+         file: filesByGlob[0].path,
          type: 'jar']
     ]
                          );
