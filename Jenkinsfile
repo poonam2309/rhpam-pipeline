@@ -43,6 +43,8 @@ pipeline {
                     echo "${filesByGlob[0].name} ${filesByGlob[0].path} ${filesByGlob[0].directory} ${filesByGlob[0].length} ${filesByGlob[0].lastModified}"
                     artifactPath = filesByGlob[0].path;
                     echo '$artifactPath'
+                    GIT_VERSION=git --git-dir=helloTask/.git log -n 1 --pretty=format:'%h';
+                    echo "git version=== ${GIT_VERSION}"
                     artifactExists = fileExists artifactPath;
                     if(artifactExists) {
                       echo "*** File: ${artifactPath}, group: ${pom.groupId}, artifact: ${pom.artifactId} packaging: ${pom.packaging}, version: ${pom.version}"
