@@ -59,7 +59,7 @@ pipeline {
                                credentialsId: NEXUS_CREDENTIAL_ID,
                      artifacts: [
                        [artifactId: pom.artifactId,
-                        classifier: '',
+                        classifier: '1.0.0',
                         file: filesByGlob[0].path,
                         type: 'jar']
                             ]
