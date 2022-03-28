@@ -44,7 +44,7 @@ pipeline {
                     artifactPath = filesByGlob[0].path;
                     echo '$artifactPath'
                     GIT_VERSION=git --git-dir=helloTask/.git log -n 1 --pretty=format:'%h';
-                    echo "git version=== ${GIT_VERSION}"
+                    echo "git commit version=== ${GIT_VERSION}"
                     artifactExists = fileExists artifactPath;
                     if(artifactExists) {
                       echo "*** File: ${artifactPath}, group: ${pom.groupId}, artifact: ${pom.artifactId} packaging: ${pom.packaging}, version: ${pom.version}"
