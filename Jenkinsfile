@@ -53,7 +53,7 @@ pipeline {
                              nexusVersion: 'nexus3',
                              protocol: 'https',
                               nexusUrl: NEXUS_URL,
-                              version: '1.0.0',
+                              version: GIT_VERSION,
                                groupId: pom.groupId,
                                repository: NEXUS_REPOSITORY,
                                credentialsId: NEXUS_CREDENTIAL_ID,
