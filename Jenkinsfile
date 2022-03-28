@@ -76,9 +76,10 @@ pipeline {
       steps {
         script {
           echo "Deploying projects in Kie-server"
-          echo '$artifactPath'
-          echo 'curl -v -k -u "adminUser:5G3XHvX4" -X PUT "https://lic-kieserver.apps.cluster-aea6.aea6.example.opentlc.com/services/rest/server/containers/${GIT_PROJECT}-1.0.0" --data-binary "@'${GIT_PROJECT}'/kie-container.xml" -H "Content-Type: application/xml"'
-        sh 'curl -v -k -u "adminUser:5G3XHvX4" -X PUT "https://lic-kieserver.apps.cluster-aea6.aea6.example.opentlc.com/services/rest/server/containers/${GIT_PROJECT}-1.0.0" --data-binary "@'${GIT_PROJECT}'/kie-container.xml" -H "Content-Type: application/xml"'
+          echo "artifact $artifactPath"
+          echo "git project ${GIT_PROJECT}"
+          echo 'curl -v -k -u "adminUser:5G3XHvX4" -X PUT "https://lic-kieserver.apps.cluster-aea6.aea6.example.opentlc.com/services/rest/server/containers/helloTask-1.0.0" --data-binary "@'${GIT_PROJECT}'/kie-container.xml" -H "Content-Type: application/xml"'
+        sh 'curl -v -k -u "adminUser:5G3XHvX4" -X PUT "https://lic-kieserver.apps.cluster-aea6.aea6.example.opentlc.com/services/rest/server/containers/helloTask-1.0.0" --data-binary "@'${GIT_PROJECT}'/kie-container.xml" -H "Content-Type: application/xml"'
    
         }
       }
