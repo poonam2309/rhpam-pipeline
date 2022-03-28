@@ -46,7 +46,7 @@ pipeline {
                     GIT_VERSION=sh (script: "git --git-dir=helloTask/.git log -n 1 --pretty=format:'%h'", returnStdout:true)
                     //GIT_VERSION=git --git-dir=helloTask/.git log -n 1 --pretty=format:'%h';
                     echo "git commit version=== ${GIT_VERSION}"
-                    sh 'ls /tmp/workspace/rhpam/tmp'
+                    sh 'ls /tmp/workspace/rhpam'
                     artifactExists = fileExists artifactPath;
                     if(artifactExists) {
                       echo "*** File: ${artifactPath}, group: ${pom.groupId}, artifact: ${pom.artifactId} packaging: ${pom.packaging}, version: ${pom.version}"
