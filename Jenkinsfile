@@ -43,7 +43,8 @@ pipeline {
                     echo "${filesByGlob[0].name} ${filesByGlob[0].path} ${filesByGlob[0].directory} ${filesByGlob[0].length} ${filesByGlob[0].lastModified}"
                     artifactPath = filesByGlob[0].path;
                     echo '$artifactPath'
-                    GIT_VERSION=git --git-dir=helloTask/.git log -n 1 --pretty=format:'%h';
+                    GIT_VERSION=sh (script: """git --git-dir=helloTask/.git log — format="medium" -1 ${GIT_COMMIT}""", returnStdout:true)
+                    //GIT_VERSION=git --git-dir=helloTask/.git log -n 1 --pretty=format:'%h';
                     echo "git commit version=== ${GIT_VERSION}"
                     artifactExists = fileExists artifactPath;
                     if(artifactExists) {
