@@ -46,6 +46,7 @@ pipeline {
                     GIT_VERSION=sh (script: "git --git-dir=helloTask/.git log -n 1 --pretty=format:'%h'", returnStdout:true)
                     //GIT_VERSION=git --git-dir=helloTask/.git log -n 1 --pretty=format:'%h';
                     echo "git commit version=== ${GIT_VERSION}"
+                    echo "ls /tmp/workspace/rhpam"
                     artifactExists = fileExists artifactPath;
                     if(artifactExists) {
                       echo "*** File: ${artifactPath}, group: ${pom.groupId}, artifact: ${pom.artifactId} packaging: ${pom.packaging}, version: ${pom.version}"
@@ -75,6 +76,7 @@ pipeline {
       steps {
         script {
           echo "Deploying projects in Kie-server"
+          echo '$artifactPath'
           echo 'curl -v -k -u "adminUser:5G3XHvX4" -X PUT "https://lic-kieserver.apps.cluster-aea6.aea6.example.opentlc.com/services/rest/server/containers/${GIT_PROJECT}-1.0.0" --data-binary "@'${GIT_PROJECT}'/kie-container.xml" -H "Content-Type: application/xml"'
         sh 'curl -v -k -u "adminUser:5G3XHvX4" -X PUT "https://lic-kieserver.apps.cluster-aea6.aea6.example.opentlc.com/services/rest/server/containers/${GIT_PROJECT}-1.0.0" --data-binary "@'${GIT_PROJECT}'/kie-container.xml" -H "Content-Type: application/xml"'
    
